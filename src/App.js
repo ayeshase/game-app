@@ -15,6 +15,9 @@ const showAlert = (message, type)=>{
     type: type
   
    })
+   setTimeout(() => {
+    setAlert(null);
+   }, 1500);
 }
 
 
