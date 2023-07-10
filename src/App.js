@@ -3,7 +3,12 @@ import './App.css';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import Alert from './components/Alert';
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
 const [Mode, SetMode] = useState('light');
@@ -17,7 +22,7 @@ const showAlert = (message, type)=>{
    })
    setTimeout(() => {
     setAlert(null);
-   }, 1500);
+   }, 2000);
 }
 
 
@@ -37,9 +42,18 @@ showAlert("dark mode has been enabled", "success");
 
   return (
    <>
-   <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode}/>
+      <Router>
+
+    <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode}/>
    <Alert alert={alert} />
-   <About heading="About Us"/>
+    <Routes>
+    <Route path="/about" element={<About />}>
+
+          </Route>
+        </Routes>
+      
+    </Router>
+  
    </>
   );
 }
