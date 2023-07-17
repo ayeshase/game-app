@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import About from './components/About';
 import Navbar from './components/Navbar';
+import About from './components/About';
+import Home from './components/Home'
 import Alert from './components/Alert';
 import React from "react";
 import {
@@ -29,7 +30,7 @@ const showAlert = (message, type)=>{
 const toogleMode = ()=>{
   if(Mode === 'light'){
     SetMode('dark');
-document.body.style.backgroundColor = '#1e3953';
+document.body.style.backgroundColor = '#212e54';
 showAlert("dark mode has been enabled", "success");
   }
   else{
@@ -47,7 +48,11 @@ showAlert("dark mode has been enabled", "success");
     <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode}/>
    <Alert alert={alert} />
     <Routes>
-    <Route path="/about" element={<About />}>
+    <Route path="/" element={<Home />}>
+
+</Route>
+
+    <Route path="/about" element={<About mode={Mode} />}>
 
           </Route>
         </Routes>
