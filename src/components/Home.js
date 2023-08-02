@@ -5,8 +5,8 @@ export default function Home (props) {
 
 
   return (
-    <div className='container'>
-        <h1>Let's Learn About Games</h1>
+    <div className='container  my-3'>
+        <h1>Top headlines</h1>
         <Games />
        
     </div>
