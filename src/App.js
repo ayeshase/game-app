@@ -49,7 +49,7 @@ showAlert("dark mode has been enabled", "success");
     <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode}/>
    <Alert alert={alert} />
     <Routes>
-    <Route path="/" element={<Home  />}>
+    <Route path="/" element={<Home mode={Mode} />}>
 
 </Route>
 
