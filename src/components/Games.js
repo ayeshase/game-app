@@ -6,7 +6,7 @@ constructor(){
   super();
   console.log("hello hi");
    this.state = {
-    articles: this.articles,
+    articles: [],
     loading: false,
     page: 1
 }
@@ -18,7 +18,7 @@ constructor(){
     let data = await fetch(url);
     let parseData = await data.json();
     console.log(parseData)
-    this.setState({articles: parseData.articles})
+    this.setState({articles: parseData.articles, totalResults:  parseData.totalResults })
 
 }
 handlePrevClick  = async () =>{
@@ -37,7 +37,10 @@ this.setState({
 
 handleNextClick = async  () =>{
     console.log('next')
-   
+   if    (this.state.page + 1 > Math.ceil (this.state.totalResults/6)){
+
+   }
+   else{
     let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page + 1}&pageSize=6`;
     let data = await fetch(url);
     let parseData = await data.json();
@@ -50,7 +53,7 @@ handleNextClick = async  () =>{
     })
 
 
-
+   }
 }
 
 
