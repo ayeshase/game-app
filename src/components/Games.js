@@ -14,7 +14,7 @@ constructor(){
  
   async  componentDidMount(){
     console.log('cdm')
-    let url = "https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=1pageSize=6";
+    let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     console.log(parseData)
@@ -23,7 +23,7 @@ constructor(){
 }
 handlePrevClick  = async () =>{
 console.log('prev')
-let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page - 1}&pageSize=6`;
+let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
 let data = await fetch(url);
 let parseData = await data.json();
 console.log(parseData)
@@ -37,11 +37,11 @@ this.setState({
 
 handleNextClick = async  () =>{
     console.log('next')
-   if    (this.state.page + 1 > Math.ceil (this.state.totalResults/6)){
+   if(this.state.page + 1 > Math.ceil (this.state.totalResults/this.props.pageSize)){
 
    }
    else{
-    let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page + 1}&pageSize=6`;
+    let url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json();
     console.log(parseData)
@@ -76,7 +76,7 @@ handleNextClick = async  () =>{
       </div>
 <div className='container d-flex justify-content-between'>
       <button  disabled={this.state.page<=1}   type="button" class="btn btn-dark"  onClick={this.handlePrevClick}>&larr; Previos</button>
-      <button type="button" class="btn btn-dark" onClick={this.handleNextClick} >Next &rarr;</button>
+      <button disabled={this.state.page + 1 > Math.ceil (this.state.totalResults/this.props.pageSize)} type="button" class="btn btn-dark" onClick={this.handleNextClick} >Next &rarr;</button>
 
 </div>
 

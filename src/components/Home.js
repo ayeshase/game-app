@@ -9,7 +9,7 @@ export default function Home (props) {
 
   return (
     <div className='container  my-3'  style={myStyle}>
-        <h1 style={myStyle} >Top headlines</h1>
+        <h1  className='text-center' style={myStyle} >Top headlines</h1>
         <Games />
     </div>
   )

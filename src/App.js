@@ -56,7 +56,7 @@ showAlert("dark mode has been enabled", "success");
     <Route path="/about" element={<About mode={Mode} />}>
 
           </Route>
-          <Route path="/Games" element={<Games mode={Mode} />}>
+          <Route path="/Games" element={<Games pageSize={6} mode={Mode} />}>
 
 </Route>
 
