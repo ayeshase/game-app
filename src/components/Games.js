@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 import GameItems from './gameItems'
+import propTypes from 'prop-types'
+
+
+
 export default class Games extends Component {
+
+  static defaultProps = {
+    pageSize: 6
+  }
+   static propTypes = {
+    pageSize: propTypes.number
+   }
 
 constructor(){
   super();
@@ -76,7 +87,7 @@ handleNextClick = async  () =>{
       </div>
 <div className='container d-flex justify-content-between'>
       <button  disabled={this.state.page<=1}   type="button" class="btn btn-dark"  onClick={this.handlePrevClick}>&larr; Previos</button>
-      <button disabled={this.state.page + 1 > Math.ceil (this.state.totalResults/this.props.pageSize)} type="button" class="btn btn-dark" onClick={this.handleNextClick} >Next &rarr;</button>
+      <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize)} type="button" class="btn btn-dark" onClick={this.handleNextClick} >Next &rarr;</button>
 
 </div>
 

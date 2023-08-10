@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import About from './components/About';
-import Games from './components/Games';
 import Home from './components/Home'
 import Alert from './components/Alert';
 import React from "react";
@@ -56,9 +55,6 @@ showAlert("dark mode has been enabled", "success");
     <Route path="/about" element={<About mode={Mode} />}>
 
           </Route>
-          <Route path="/Games" element={<Games pageSize={6} mode={Mode} />}>
-
-</Route>
 
 
         </Routes>
