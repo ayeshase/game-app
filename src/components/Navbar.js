@@ -9,7 +9,7 @@ export default function Navbar(props) {
 
   return (
     <div >
-      <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+      <nav className={`navbar navbar-expand-lg navbar-dark bg-dark`}>
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@ export default function Navbar(props) {
 
             <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
               <input className="form-check-input" onClick={props.toogleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark Mode</label>
+              <label className="form-check-label  text-white" htmlFor="flexSwitchCheckDefault">Enable Dark Mode</label>
             </div>
           </div>
         </div>

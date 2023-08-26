@@ -17,7 +17,7 @@ export default function Home(props) {
         <h1 className='text-center my-3' style={myStyle} >Top headlines</h1>
 
 
-        <Games pageSize={6} />
+        <Games pageSize={12} />
 
       </div>
     </div>
