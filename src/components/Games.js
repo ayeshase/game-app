@@ -7,7 +7,7 @@ import propTypes from 'prop-types'
 export default class Games extends Component {
 
   static defaultProps = {
-    pageSize: 6
+    pageSize: 10
   }
   static propTypes = {
     pageSize: propTypes.number
@@ -22,24 +22,21 @@ export default class Games extends Component {
       page: 1
     }
   }
-  async updateNews(pageNo) {
-    console.log('cdm')
-    let url = `https://newsapi.org/v2/everything?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=1&pageSize=${this.props.pageSize}`;
+  async updateNews() {
+    const url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.setState({loading: true})
     let data = await fetch(url);
     let parseData = await data.json();
     console.log(parseData)
     this.setState({
       articles: parseData.articles,
       totalResults: parseData.totalResults,
-      loading: false
-
-
-    })
+      loading: false })
 
   }
 
   async componentDidMount() {
-    this.updateNews();
+    this.updateNews()
   }
   handlePrevClick = async () => {
 
@@ -50,9 +47,7 @@ export default class Games extends Component {
 
   handleNextClick = async () => {
     this.setState({
-      page: this.state.page
-        + 1
-    });
+      page: this.state.page + 1 });
     this.updateNews();
 
   }
