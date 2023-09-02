@@ -2,10 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-export default function Navbar(props) {
-
-
-
+const Navbar = (props) => {
 
   return (
     <div >
@@ -18,13 +15,12 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                <Link className="nav-link active" aria-current="page" to="/">Games</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>
             </ul>
-
             <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
               <input className="form-check-input" onClick={props.toogleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
               <label className="form-check-label  text-white" htmlFor="flexSwitchCheckDefault">Enable Dark Mode</label>
@@ -35,3 +31,4 @@ export default function Navbar(props) {
     </div>
   )
 }
+export default Navbar;

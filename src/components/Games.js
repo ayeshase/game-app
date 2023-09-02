@@ -1,89 +1,79 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import GameItems from './gameItems'
 import propTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
 
-export default class Games extends Component {
+const Games = () => {
+  const [articles, setArticles] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [totalResults, setTotalResults] = useState(0)
 
-  static defaultProps = {
-    pageSize: 12
-  }
-  static propTypes = {
-    pageSize: propTypes.number
-  }
 
-  constructor() {
-    super();
-    this.state = {
-      articles: [],
-      loading: false,
-      page: 1,
-      totalResults: 0
-    }
-  }
-  async updateNews() {
+
+  const updateNews = async (props) => {
+    props.setProgress(10)
     const url = `https://newsapi.org/v2/everything?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true })
+    setLoading(true)
     let data = await fetch(url);
+    props.setProgress(30)
     let parseData = await data.json();
-    this.setState({
-      articles: parseData.articles,
-      totalResults: parseData.totalResults,
-      loading: false
-    })
+    props.setProgress(70)
+    setArticles(parseData.articles);
+    setTotalResults(parseData.totalResults)
+    setLoading(false);
+
+    props.setProgress(100)
 
   }
+  useEffect(() => {
+    updateNews()
 
-  async componentDidMount() {
-    this.updateNews()
-  }
-  handlePrevClick = async () => {
-
-    this.setState({ page: this.state.page - 1 });
-    this.updateNews();
-  }
+  }, [])
 
 
-  handleNextClick = async () => {
-    this.setState({
-      page: this.state.page + 1
-    });
-    this.updateNews();
 
-  }
+  /////const handlePrevClick = async () => {
 
-  fetchMoreData = async () => {
-    this.setState({page: this.state.page + 1})
-    const url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true })
+  ///setPage(page-1)
+  //updateNews();
+  //}
+
+
+  //const handleNextClick = async () => {
+  //setPage(page+1)
+  //updateNews();
+
+  //}
+
+  const fetchMoreData = async (props) => {
+    setPage(page + 1)
+    const url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${page}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
-    let parseData = await data.json();
-    this.setState({
-      articles: this.state.articles.concat(parseData.articles),
-      totalResults: parseData.totalResults,
-      loading: false
-    })
+    let parseData = await data.json()
+    setArticles(articles.concat(parseData.articles))
+    setTotalResults(parseData.totalResults)
+
   };
 
 
 
 
-  render() {
-    return (
-      <>
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.articles.length !== this.state.totalResults}
-          loader={<h4>Loading...</h4>}
-        >
+  return (
+    <>
+      <InfiniteScroll
+        dataLength={articles.length}
+        next={fetchMoreData}
+        hasMore={articles.length !== totalResults}
+        loader={<h4>Loading...</h4>}
+      >
         <div className='container'>
 
           <div className='row'>
 
-            {this.state.articles?.map((article) => {
+            {articles?.map((article) => {
 
               return <div className='col-md-4' key={article.url}>
 
@@ -94,12 +84,19 @@ export default class Games extends Component {
 
             })}
           </div>
-         </div>
-        </InfiniteScroll>
+        </div>
+      </InfiniteScroll>
 
-    
 
-</>
-    )
-  }
+
+    </>
+  )
 }
+Games.defaultProps = {
+  pageSize: 12
+}
+Games.propTypes = {
+  pageSize: propTypes.number
+}
+
+export default Games

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+import Games from './components/Games'
+
 import About from './components/About';
-import Home from './components/Home'
 import Alert from './components/Alert';
 import React from "react";
 import {
@@ -10,8 +11,18 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 
 function App() {
+  const pageSize = 12;
+
+
+ const [progress, setProgress] = useState(0);
+
+
+   
+
+
   const [Mode, SetMode] = useState('light');
 
   const [alert, setAlert] = useState(null);
@@ -43,12 +54,22 @@ function App() {
 
   return (
     <>
+ 
+
+
       <Router>
 
         <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode} />
+        <LoadingBar
+        color='#f11946'
+        progress={progress}
+      />
+
+
+
         <Alert alert={alert} />
         <Routes>
-          <Route path="/" element={<Home mode={Mode} />}>
+          <Route path="/" element={<Games setProgress={setProgress} pageSize={pageSize} mode={Mode} />}>
 
           </Route>
 
