@@ -14,17 +14,11 @@ import {
 import LoadingBar from 'react-top-loading-bar'
 
 function App() {
+
   const pageSize = 12;
 
-
- const [progress, setProgress] = useState(0);
-
-
-   
-
-
+  const [progress, setProgress] = useState(0);
   const [Mode, SetMode] = useState('light');
-
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
     setAlert({
@@ -54,31 +48,23 @@ function App() {
 
   return (
     <>
- 
+
 
 
       <Router>
 
         <Navbar title="Best Games Ever" mode={Mode} toogleMode={toogleMode} />
         <LoadingBar
-        color='#f11946'
-        progress={progress}
-      />
-
-
-
+          color='#f11946'
+          progress={progress}
+        />
         <Alert alert={alert} />
         <Routes>
-          <Route path="/" element={<Games setProgress={setProgress} pageSize={pageSize} mode={Mode} />}>
-
+          <Route path="/" element={<Games  setProgress={setProgress} pageSize={pageSize} mode={Mode} />}>
           </Route>
-
           <Route path="/about" element={<About mode={Mode} />}>
-
           </Route>
-
-
-        </Routes>
+       </Routes>
 
       </Router>
 

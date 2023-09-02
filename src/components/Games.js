@@ -63,6 +63,7 @@ const Games = () => {
 
   return (
     <>
+    <h1 className='text-center' style={{margin: '35px 0px', marginTop: '80px'}}>Top Headlines About Games</h1>
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}

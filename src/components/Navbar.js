@@ -6,7 +6,7 @@ const Navbar = (props) => {
 
   return (
     <div >
-      <nav className={`navbar navbar-expand-lg navbar-dark bg-dark`}>
+      <nav className={`navbar fixed-top navbar-expand-lg navbar-dark bg-dark`}>
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
