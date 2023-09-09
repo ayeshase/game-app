@@ -2,10 +2,19 @@ import React, { useEffect, useState } from 'react'
 import GameItems from './gameItems'
 import propTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
+import Spinner from './Spinner';
 
 
 
-const Games = () => {
+const Games = (props) => {
+
+  let myStyle = {
+    color: props.mode === 'dark'?'white':'#212e54',
+    backgroundColor: props.mode === 'dark'?'#212e54':'white'
+  }
+
+
+
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -13,14 +22,14 @@ const Games = () => {
 
 
 
-  const updateNews = async (props) => {
-    props.setProgress(10)
-    const url = `https://newsapi.org/v2/everything?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+  const updateNews = async () => {
+    props.setProgress(10);
+    const url = `https://newsapi.org/v2/everything?q=games&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
     setLoading(true)
     let data = await fetch(url);
-    props.setProgress(30)
+    props.setProgress(30);
     let parseData = await data.json();
-    props.setProgress(70)
+    props.setProgress(70);
     setArticles(parseData.articles);
     setTotalResults(parseData.totalResults)
     setLoading(false);
@@ -29,8 +38,8 @@ const Games = () => {
 
   }
   useEffect(() => {
-    updateNews()
-
+    updateNews();
+ // eslint-disable-next-line
   }, [])
 
 
@@ -48,9 +57,9 @@ const Games = () => {
 
   //}
 
-  const fetchMoreData = async (props) => {
+  const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
     setPage(page + 1)
-    const url = `https://newsapi.org/v2/top-headlines?q=games&apiKey=42377419c3fa48e9b28e861ee070db1c&page=${page}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
     let parseData = await data.json()
     setArticles(articles.concat(parseData.articles))
@@ -63,12 +72,13 @@ const Games = () => {
 
   return (
     <>
-    <h1 className='text-center' style={{margin: '35px 0px', marginTop: '80px'}}>Top Headlines About Games</h1>
+    <h1 className='text-center my-3 0px  mt-5' style={myStyle} >Games- Top Games Headlines</h1>
+    {loading&& <Spinner/>}
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
         hasMore={articles.length !== totalResults}
-        loader={<h4>Loading...</h4>}
+        loader={<spinner/>}
       >
         <div className='container'>
 

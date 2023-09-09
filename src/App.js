@@ -16,6 +16,7 @@ import LoadingBar from 'react-top-loading-bar'
 function App() {
 
   const pageSize = 12;
+  const apiKey = process.env.REACT_APP_GAME_API
 
   const [progress, setProgress] = useState(0);
   const [Mode, SetMode] = useState('light');
@@ -60,7 +61,7 @@ function App() {
         />
         <Alert alert={alert} />
         <Routes>
-          <Route path="/" element={<Games  setProgress={setProgress} pageSize={pageSize} mode={Mode} />}>
+          <Route path="/" element={<Games setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} mode={Mode} />}>
           </Route>
           <Route path="/about" element={<About mode={Mode} />}>
           </Route>
